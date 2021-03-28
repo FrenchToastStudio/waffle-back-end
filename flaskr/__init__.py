@@ -3,7 +3,9 @@ import os
 
 from flask import Flask
 
-from flaskr.Controllers.hello import blueprint
+from flaskr.Controllers.hello import hello_blueprint
+from flaskr.Controllers.auth import auth_blueprint
+
 
 def create_app(test_config=None):
     # create and configure the app
@@ -12,7 +14,8 @@ def create_app(test_config=None):
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
     )
-    app.register_blueprint(blueprint)
+    app.register_blueprint(hello_blueprint)
+    app.register_blueprint(auth_blueprint)
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -27,5 +30,7 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-
+    from . import db
+    db.init_app(app)
+    
     return app

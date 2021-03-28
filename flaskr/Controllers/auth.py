@@ -2,8 +2,8 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for, make_response, jsonify
 )
 
-hello_blueprint = Blueprint('hello_blueprint0', __name__)
+auth_blueprint = Blueprint('auth_blueprint', __name__)
 
-@hello_blueprint.route('/')
+@auth_blueprint.route('/connexion')
 def hello_world():
-    return 'Hello, World!'
+    return 'This will be a login'
