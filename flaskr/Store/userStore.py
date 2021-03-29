@@ -36,4 +36,4 @@ class userStore:
 
         if error is None:
             return user
-        flash(error)
+        return error
