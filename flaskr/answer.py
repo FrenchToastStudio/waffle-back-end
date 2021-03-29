@@ -3,13 +3,14 @@ from flask import current_app, flash, jsonify, make_response, redirect, request,
 class answer:
     def succes(response):
         theAnswer = {
-            'statut': 'succes',
+            'statut': 'Succes',
             'response': response
         }
         return make_response(jsonify(theAnswer)), 200
+
     def fail(response):
         theAnswer = {
-            'statut': 'succes',
+            'statut': 'Failure',
             'response': response
         }
         return make_response(jsonify(theAnswer)), 412

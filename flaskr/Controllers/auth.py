@@ -11,3 +11,10 @@ def register():
         email = request.form['email']
         password = request.form['password']
         return authManager.register(email, password)
+
+@auth_blueprint.route('/login', methods=('GET', 'POST'))
+def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        return authManager.login(email, password)

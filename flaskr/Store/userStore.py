@@ -1,12 +1,13 @@
 from flaskr.db import get_db
 from werkzeug.security import check_password_hash, generate_password_hash
-
+from flask import flash
 class userStore:
 
 
-    def createUser(email, password):
+    def create(email, password):
         error = None
         db = get_db()
+        print(generate_password_hash(password))
         if db.execute(
             'SELECT id FROM Users WHERE Email = ?', (email,)
         ).fetchone() is not None:
@@ -19,3 +20,20 @@ class userStore:
             db.commit()
             return True
         return False
+
+
+    def findByLoginInfo(email, password):
+        error = None
+        db = get_db()
+        user = db.execute(
+            'SELECT * FROM Users WHERE Email = ?', (email,)
+        ).fetchone()
+
+        if user is None:
+            error = 'Incorrect email OR password.'
+        elif not check_password_hash(user['password'], password) :
+            error = 'Incorrect password.'
+
+        if error is None:
+            return user
+        flash(error)
