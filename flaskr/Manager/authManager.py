@@ -27,7 +27,7 @@ class authManager:
             user = userStore.findByLoginInfo(email, password)
 
             if isinstance(user, str):
-                return return answer.fail(user)
+                return answer.fail(user)
             elif user is None:
                 return answer.fail('Incorrect username OR password.')
 
